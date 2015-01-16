@@ -9,7 +9,7 @@ class Password(object):
     DICTIONARIES = ("/usr/share/dict/words", "/usr/share/dict/extra.words")
     SEARCH = "https://www.google.nl/search?q={}"
 
-    def __init__(self, password, min_length=8):
+    def __init__(self, password, min_length=20):
 
         self.minimum_length = min_length
 
