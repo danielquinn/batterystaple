@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+
+import sys
+from passwordchecker.password import Password
+
+if len(sys.argv) == 1:
+    print("Usage: {} <password>[ password[ ...]]".format(sys.argv[0]))
+    sys.exit(1)
+
+for password in sys.argv[1:]:
+
+    password = Password(password)
+
+    length = "OK"
+    if not password.check_length():
+        length = "TOO SHORT"
+
+    dictionary = "OK"
+    if not password.check_dictionary():
+        dictionary = "FAIL"
+
+    md5 = "OK"
+    if not password.check_rainbow("md5"):
+        md5 = "FAIL"
+
+    sha1 = "OK"
+    if not password.check_rainbow("sha1"):
+        sha1 = "FAIL"
+
+    sha256 = "OK"
+    if not password.check_rainbow("sha256"):
+        sha256 = "FAIL"
+
+    print("""
+      Report for: {cleartext}
+      Length: {length}
+      Dictionary: {dictionary}
+      Rainbows:
+        MD5: {md5}
+        SHA1: {sha1}
+        SHA256: {sha256}
+    \n""".format(
+        cleartext=password.cleartext,
+        length=length,
+        dictionary=dictionary,
+        md5=md5,
+        sha1=sha1,
+        sha256=sha256
+    ))
