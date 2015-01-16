@@ -17,17 +17,21 @@ def get_version():
                 return m.group("version")
 
 setup(
-    name = "batterystaple",
-    version = get_version(),
-    description = "A password checker that follows XKCD's sage advice and does some rainbow table checks on top of that.",
-    long_description = open("README.rst").read(),
-    url = "https://github.com/danielquinn/batterystaple/",
-    author = "Danielquinn",
-    author_email = "code@danielquinn.org",
-    packages = [
+    name="batterystaple",
+    version=get_version(),
+    description="A password checker that follows XKCD's sage advice and does some rainbow table checks on top of that.",
+    long_description=open("README.rst").read(),
+    url="https://github.com/danielquinn/batterystaple/",
+    author="Danielquinn",
+    author_email="code@danielquinn.org",
+    license="AGPL3",
+    packages=[
         "batterystaple",
     ],
-    classifiers = [
+    scripts=[
+        "bin/batterystaple",
+    ],
+    classifiers=[
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU Affero General Public License v3",
