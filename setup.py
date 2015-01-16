@@ -1,9 +1,24 @@
 import os
+import re
+
 from setuptools import setup
+
+def get_version():
+    version_file = os.path.join(
+        os.path.dirname(__file__), 
+        'batterystaple', 
+        '__init__.py'
+    )
+    with open(version_file) as f:
+        regex = re.compile("^__version__.*?(?P<version>[\d.]+).*")
+        for line in f.readlines():
+            m = regex.match(line)
+            if m:
+                return m.group("version")
 
 setup(
     name = "batterystaple",
-    version = open(os.path.join(os.path.dirname(__file__), 'batterystaple', 'VERSION')).read().strip(),
+    version = get_version(),
     description = "A password checker that follows XKCD's sage advice and does some rainbow table checks on top of that.",
     long_description = open("README.rst").read(),
     url = "https://github.com/danielquinn/batterystaple/",
@@ -20,3 +35,4 @@ setup(
         "Operating System :: OS Independent",
     ]
 )
+
