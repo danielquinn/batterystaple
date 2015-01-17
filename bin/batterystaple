@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
 import sys
-from passwordchecker.password import Password
+
+from batterystaple.password import Password
+from batterystaple.colours import Colour
 
 if len(sys.argv) == 1:
     print("Usage: {} <password>[ password[ ...]]".format(sys.argv[0]))
@@ -11,25 +13,25 @@ for password in sys.argv[1:]:
 
     password = Password(password)
 
-    length = "OK"
+    length = Colour.success("OK")
     if not password.check_length():
-        length = "TOO SHORT"
+        length = Colour.danger("TOO SHORT")
 
-    dictionary = "OK"
+    dictionary = Colour.success("OK")
     if not password.check_dictionary():
-        dictionary = "FAIL"
+        dictionary = Colour.danger("FAIL")
 
-    md5 = "OK"
+    md5 = Colour.success("OK")
     if not password.check_rainbow("md5"):
-        md5 = "FAIL"
+        md5 = Colour.danger("FAIL")
 
-    sha1 = "OK"
+    sha1 = Colour.success("OK")
     if not password.check_rainbow("sha1"):
-        sha1 = "FAIL"
+        sha1 = Colour.danger("FAIL")
 
-    sha256 = "OK"
+    sha256 = Colour.success("OK")
     if not password.check_rainbow("sha256"):
-        sha256 = "FAIL"
+        sha256 = Colour.danger("FAIL")
 
     print("""
       Report for: {cleartext}
@@ -40,7 +42,7 @@ for password in sys.argv[1:]:
         SHA1: {sha1}
         SHA256: {sha256}
     \n""".format(
-        cleartext=password.cleartext,
+        cleartext=Colour.info(password.cleartext),
         length=length,
         dictionary=dictionary,
         md5=md5,
