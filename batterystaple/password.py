@@ -35,14 +35,17 @@ class Password(object):
         digest = getattr(hashlib, lib)(self.cleartext.encode("utf-8"))
         url = self.SEARCH.format(digest.hexdigest())
 
-        request = Request(url, headers={
+        response = urlopen(
+            Request(url, headers={
             "User-Agent": "Mozilla/5.0 (X11; Linux i586; rv:34.0) Gecko/20100101 Firefox/31.0"
-        })
+            })
+        )
 
-        if self.cleartext in str(urlopen(request).read()):
-            return False
+        # Long response means we found at least one result
+        if len(str(response.read())) < 160000:
+            return True
 
-        return True
+        return False
 
     def check_rainbows(self):
         for lib in ("md5", "sha1", "sha256"):
