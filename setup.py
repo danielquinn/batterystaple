@@ -6,7 +6,7 @@ from setuptools import setup
 def get_version():
     version_file = os.path.join(
         os.path.dirname(__file__), 
-        'batterystaple', 
+        'issac', 
         '__init__.py'
     )
     with open(version_file) as f:
@@ -17,19 +17,19 @@ def get_version():
                 return m.group("version")
 
 setup(
-    name="batterystaple",
+    name="issac",
     version=get_version(),
-    description="A password checker that follows XKCD's sage advice and does some rainbow table checks on top of that.",
+    description="A password checker that uses the natural rainbow table that is Google Search for validation.",
     long_description=open("README.rst").read(),
-    url="https://github.com/danielquinn/batterystaple/",
+    url="https://github.com/danielquinn/issac/",
     author="Danielquinn",
     author_email="code@danielquinn.org",
     license="AGPL3",
     packages=[
-        "batterystaple",
+        "issac",
     ],
     scripts=[
-        "bin/batterystaple",
+        "bin/issac",
     ],
     classifiers=[
         "Programming Language :: Python",
