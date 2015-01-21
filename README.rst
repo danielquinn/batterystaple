@@ -1,5 +1,5 @@
 issac
-=============
+=====
 
 A password checker uses the natural rainbow table that is Google search for
 validation.
@@ -66,6 +66,9 @@ You can use ``issac`` from within Python too::
     my_password.check_rainbow("sha1")    # False
     my_password.check_rainbow("sha256")  # False
 
+Colophon
+--------
 
-
-
+But why "Issac"?  The idea here is that we're going for rainbow tables, and who
+better to name this after than the person who discovered and documented the
+visual spectrum?  Issac Newton was a really smart guy.
