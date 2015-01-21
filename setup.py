@@ -22,7 +22,7 @@ setup(
     description="A password checker that uses the natural rainbow table that is Google Search for validation.",
     long_description=open("README.rst").read(),
     url="https://github.com/danielquinn/issac/",
-    author="Danielquinn",
+    author="Daniel Quinn",
     author_email="code@danielquinn.org",
     license="AGPL3",
     packages=[

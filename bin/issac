@@ -2,8 +2,8 @@
 
 import sys
 
-from batterystaple.password import Password
-from batterystaple.colours import Colour
+from issac.password import Password
+from issac.colours import Colour
 
 if len(sys.argv) == 1:
     print("Usage: {} <password>[ password[ ...]]".format(sys.argv[0]))
@@ -12,14 +12,6 @@ if len(sys.argv) == 1:
 for password in sys.argv[1:]:
 
     password = Password(password)
-
-    length = Colour.success("OK")
-    if not password.check_length():
-        length = Colour.danger("TOO SHORT")
-
-    dictionary = Colour.success("OK")
-    if not password.check_dictionary():
-        dictionary = Colour.danger("FAIL")
 
     md5 = Colour.success("OK")
     if not password.check_rainbow("md5"):
@@ -35,16 +27,12 @@ for password in sys.argv[1:]:
 
     print("""
       Report for: {cleartext}
-      Length: {length}
-      Dictionary: {dictionary}
-      Rainbows:
-        MD5: {md5}
-        SHA1: {sha1}
-        SHA256: {sha256}
+      ------------------------------------------------------------------------
+      MD5:    {md5}
+      SHA1:   {sha1}
+      SHA256: {sha256}
     \n""".format(
         cleartext=Colour.info(password.cleartext),
-        length=length,
-        dictionary=dictionary,
         md5=md5,
         sha1=sha1,
         sha256=sha256

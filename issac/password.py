@@ -1,51 +1,39 @@
 import hashlib
 import re
 
-from urllib.request import Request, urlopen
-
+try:
+    # Python3
+    from urllib.request import Request, urlopen
+except ImportError:
+    # Python2
+    from urllib2 import urlopen, Request
 
 class Password(object):
 
-    DICTIONARIES = ("/usr/share/dict/words", "/usr/share/dict/extra.words")
-    SEARCH = "https://www.google.nl/search?q={}"
+    SEARCH = "https://www.google.ca/search?q={}"
 
-    def __init__(self, password, min_length=20):
-
-        self.minimum_length = min_length
-
+    def __init__(self, password):
         self.cleartext = password
-
-    def check_length(self):
-        return len(self.cleartext) > self.minimum_length
-
-    def check_dictionary(self):
-
-        words = []
-        for dictionary in self.DICTIONARIES:
-            with open(dictionary) as f:
-                words += [word.strip() for word in f.readlines()]
-
-        if self.cleartext in words:
-            return False
-
-        return True
 
     def check_rainbow(self, lib):
 
         digest = getattr(hashlib, lib)(self.cleartext.encode("utf-8"))
-        url = self.SEARCH.format(digest.hexdigest())
+        hexdigest = digest.hexdigest()
+        url = self.SEARCH.format(hexdigest)
 
         response = urlopen(
             Request(url, headers={
-            "User-Agent": "Mozilla/5.0 (X11; Linux i586; rv:34.0) Gecko/20100101 Firefox/31.0"
+                "User-Agent": "Mozilla/5.0 (X11; Linux i586; rv:34.0) "
+                              "Gecko/20100101 Firefox/31.0"
             })
         )
 
-        # Long response means we found at least one result
-        if len(str(response.read())) < 160000:
-            return True
-
-        return False
+        not_found = "Your search - <em>{}</em> - did not match any documents".format(
+            hexdigest
+        )
+        if not_found in str(response.read()):
+            return False
+        return True
 
     def check_rainbows(self):
         for lib in ("md5", "sha1", "sha256"):

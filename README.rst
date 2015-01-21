@@ -1,15 +1,15 @@
-batterystaple
+issac
 =============
 
-A password checker that follows [XKCD's sage advice](http://xkcd.com/936/) and
-does some rainbow table checks on top of that.
+A password checker uses the natural rainbow table that is Google search for
+validation.
 
 Installation
 ------------
 
 You can install it from PyPi::
 
-    $ pip install batterystaple
+    $ pip install issac
 
 
 Usage
@@ -20,48 +20,52 @@ Command Line
 
 Running it from the command line will generate a report::
 
-    $ batterystaple <password>
+    $ issac <password>
 
 So to use our favourite example::
 
-    $ batterystaple 'correct horse battery staple'
+    $ issac 'correct horse battery staple'
 
       Report for: correct horse battery staple
-      Length: OK
-      Dictionary: OK
-      Rainbows:
-        MD5: FAIL
-        SHA1: FAIL
-        SHA256: FAIL
+      MD5: FAIL
+      SHA1: FAIL
+      SHA256: FAIL
 
 But for something a little less well-known::
 
-    $ batterystaple 'carpentry esteem reeks disdainful'
+    $ issac 'carpentry esteem reeks disdainful'
 
       Report for: carpentry esteem reeks disdainful
-      Length: OK
-      Dictionary: OK
-      Rainbows:
-        MD5: OK
-        SHA1: OK
-        SHA256: OK
+      MD5: OK
+      SHA1: OK
+      SHA256: OK
 
 
 Python
 ......
 
-You can use ``batterystaple`` from within Python too::
+You can use ``issac`` from within Python too::
 
-    from batterystaple.password import Password
+    from issac.password import Password
 
     my_password = Password("correct horse battery staple")
-    my_password.check_length()
-    # True
+    my_password.check_rainbows()         # False
+    my_password.check_rainbow("md5")     # False
+    my_password.check_rainbow("sha1")    # False
+    my_password.check_rainbow("sha256")  # False
 
-    my_password.check_dictionary()
-    # True
+    my_password = Password("carpentry esteem reeks disdainful")
+    my_password.check_rainbows()         # True
+    my_password.check_rainbow("md5")     # True
+    my_password.check_rainbow("sha1")    # True
+    my_password.check_rainbow("sha256")  # True
 
-    my_password.check_rainbows()
-    # False, because the md5 hash of that password is listed in Google
+    my_password = Password("1qazxsw2")
+    my_password.check_rainbows()         # False
+    my_password.check_rainbow("md5")     # False
+    my_password.check_rainbow("sha1")    # False
+    my_password.check_rainbow("sha256")  # False
+
+
 
 
