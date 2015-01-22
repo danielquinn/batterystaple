@@ -1,4 +1,4 @@
-issac
+isaac
 =====
 
 A password checker uses the natural rainbow table that is Google search for
@@ -9,7 +9,7 @@ Installation
 
 You can install it from PyPi::
 
-    $ pip install issac
+    $ pip install isaac
 
 
 Usage
@@ -20,11 +20,11 @@ Command Line
 
 Running it from the command line will generate a report::
 
-    $ issac <password>
+    $ isaac <password>
 
 So to use our favourite example::
 
-    $ issac 'correct horse battery staple'
+    $ isaac 'correct horse battery staple'
 
       Report for: correct horse battery staple
       MD5: FAIL
@@ -33,7 +33,7 @@ So to use our favourite example::
 
 But for something a little less well-known::
 
-    $ issac 'carpentry esteem reeks disdainful'
+    $ isaac 'carpentry esteem reeks disdainful'
 
       Report for: carpentry esteem reeks disdainful
       MD5: OK
@@ -44,9 +44,9 @@ But for something a little less well-known::
 Python
 ......
 
-You can use ``issac`` from within Python too::
+You can use ``isaac`` from within Python too::
 
-    from issac.password import Password
+    from isaac.password import Password
 
     my_password = Password("correct horse battery staple")
     my_password.check_rainbows()         # False
@@ -69,6 +69,6 @@ You can use ``issac`` from within Python too::
 Colophon
 --------
 
-But why "Issac"?  The idea here is that we're going for rainbow tables, and who
+But why "Isaac"?  The idea here is that we're going for rainbow tables, and who
 better to name this after than the person who discovered and documented the
-visual spectrum?  Issac Newton was a really smart guy.
+visual spectrum?  Isaac Newton was a really smart guy.

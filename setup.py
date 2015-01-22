@@ -6,7 +6,7 @@ from setuptools import setup
 def get_version():
     version_file = os.path.join(
         os.path.dirname(__file__), 
-        'issac', 
+        'isaac', 
         '__init__.py'
     )
     with open(version_file) as f:
@@ -17,19 +17,19 @@ def get_version():
                 return m.group("version")
 
 setup(
-    name="issac",
+    name="isaac",
     version=get_version(),
     description="A password checker that uses the natural rainbow table that is Google Search for validation.",
     long_description=open("README.rst").read(),
-    url="https://github.com/danielquinn/issac/",
+    url="https://github.com/danielquinn/isaac/",
     author="Daniel Quinn",
     author_email="code@danielquinn.org",
     license="AGPL3",
     packages=[
-        "issac",
+        "isaac",
     ],
     scripts=[
-        "bin/issac",
+        "bin/isaac",
     ],
     classifiers=[
         "Programming Language :: Python",

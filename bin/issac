@@ -2,8 +2,8 @@
 
 import sys
 
-from issac.password import Password
-from issac.colours import Colour
+from isaac.password import Password
+from isaac.colours import Colour
 
 if len(sys.argv) == 1:
     print("Usage: {} <password>[ password[ ...]]".format(sys.argv[0]))
